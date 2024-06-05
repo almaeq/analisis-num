@@ -1,1 +1,1 @@
-# analisis-num
+# Aproximación discreta por mínimos cuadrados
