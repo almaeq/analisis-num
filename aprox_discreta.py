@@ -26,8 +26,19 @@ def evaluar_bases(bases, x):
         A[:, i] = base_func(x)
     return A
 
+# Función para construir la función ajustada con los coeficientes
+def construir_funcion(base_funcs, coeficientes):
+    funcion = ""
+    for coef, base in zip(coeficientes, base_funcs):
+        funcion += f"{coef}*({base}) + "
+    return funcion.rstrip(" + ")
+
 # Solicitar los datos al usuario
 x, y = solicitar_datos()
+
+# Verificar que las longitudes de x e y sean iguales
+if len(x) != len(y):
+    raise ValueError("Los vectores x e y deben tener la misma longitud.")
 
 # Solicitar las funciones base del subespacio al usuario
 bases = solicitar_bases()
@@ -35,14 +46,21 @@ bases = solicitar_bases()
 # Evaluar las funciones base en los puntos x
 A = evaluar_bases(bases, x)
 
-# Resolver el sistema de ecuaciones normales A.T * A * p = A.T * y
-# para los parámetros p
+# Verificar las dimensiones de A y y
+if A.shape[0] != y.shape[0]:
+    raise ValueError("El número de filas en la matriz A debe ser igual a la longitud del vector y.")
+
+# Resolver el sistema de ecuaciones normales A.T * A * p = A.T * y para los parámetros p
 p = np.linalg.lstsq(A, y, rcond=None)[0]
 
 # Imprimir los coeficientes uno debajo del otro
 print("Coeficientes:")
 for i, coef in enumerate(p):
     print(f"Coeficiente {i + 1}: {coef}")
+
+# Construir la función ajustada
+funcion_ajustada = construir_funcion(bases, p)
+print(f"Función ajustada: f(x) = {funcion_ajustada}")
 
 # Generar valores predichos usando los parámetros ajustados
 y_pred = A @ p
