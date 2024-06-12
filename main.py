@@ -26,7 +26,7 @@ def main():
         print(coeffs)
         if exp_form == 'a*e^(b/x)':
             print("Función ajustada:")
-            print(f"y = {coeffs[1]:.5f} * e^({coeffs[0]:.5f} / x)")
+            print(f"y = {coeffs[0]:.5f} * e^({coeffs[1]:.5f} / x)")
         elif exp_form == 'a*e^(a*x - b*x**2)':
             print("Función ajustada:")
             print(f"y = {np.exp(coeffs[2]):.5f} * e^({coeffs[0]:.5f} * x - {coeffs[1]:.5f} * x^2)")

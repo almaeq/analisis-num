@@ -55,8 +55,6 @@ def fit_and_plot(x, y, model='polinomica', bases=None, exp_form=None, custom_for
         if exp_form == 'a*e^(b/x)':
             y_fit = coeffs[0] * np.exp(coeffs[1] / x)
             label = 'Arreglo exponencial: a*e^(b/x)'
-            print("Función ajustada:")
-            print(f"y = {coeffs[0]:.5f} * e^({coeffs[1]:.5f} / x)")
         elif exp_form == 'a*e^(a*x - b*x**2)':
             y_fit = np.exp(coeffs[2]) * np.exp(coeffs[0] * x - coeffs[1] * x**2)
             label = 'Arreglo exponencial: a*e^(a*x - b*x**2)'
